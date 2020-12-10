@@ -25,7 +25,7 @@ writemsg() {
 	writemsg
 }
 trap exit_program EXIT
-echo "Welcome to talk_local"
+echo "talk-local v1"
 read -rp "Enter name of user you gonna talk with: " juid
 [ -n "$juid" ] || { echo "Enter the name of the person with whom you will communicate"; exit 1; }
 while true; do

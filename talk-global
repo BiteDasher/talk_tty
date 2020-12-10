@@ -25,7 +25,7 @@ writemsg() {
 	writemsg
 }
 trap exit_program EXIT
-echo "Welcome to talk_group"
+echo "talk-global v1"
 while true; do
 	if [ -z "$(cat $shared_dir/sync | grep -v "^${tuser} .*")" ]; then continue; fi
 	if [ "$(history_msg)" != "$(current_msg)" ]; then
