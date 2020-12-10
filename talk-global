@@ -1,10 +1,10 @@
 #!/bin/bash
 shared_dir=/tmp/talk_global
-[ -d $shared_dir ] || mkdir -m 666 $shared_dir
+[ -d $shared_dir ] || mkdir -m 777 $shared_dir
 tuser="$(whoami)"
-[ -d $shared_dir/$tuser ] || mkdir -m 666 $shared_dir/$tuser
-[ -f $shared_dir/sync ] || { touch $shared_dir/sync; chmod 666 $shared_dir/sync; }
-[ -f $shared_dir/history ] || { touch $shared_dir/history; chmod 666 $shared_dir/history; }
+[ -d $shared_dir/$tuser ] || mkdir -m 777 $shared_dir/$tuser
+[ -f $shared_dir/sync ] || { touch $shared_dir/sync; chmod 777 $shared_dir/sync; }
+[ -f $shared_dir/history ] || { touch $shared_dir/history; chmod 777 $shared_dir/history; }
 exit_program() {
 	rm -rf $shared_dir/$tuser
 }
@@ -21,7 +21,7 @@ writemsg() {
 	read -p "$(echo -e "\e[0;32m")> $(echo -e "\e[0m")" await_msg
 	ttemp="$(mktemp -p $shared_dir/$tuser)"
 	echo "$tuser $(echo $ttemp | cut -d"/" -f5-)" >> $shared_dir/sync
-	echo "$await_msg" > $ttemp; chmod 666 $ttemp
+	echo "$await_msg" > $ttemp; chmod 777 $ttemp
 	writemsg
 }
 trap exit_program EXIT
