@@ -34,6 +34,7 @@ while true; do
 	if [ "$(history_msg)" != "$(current_msg)" ]; then
 		echo -e "\n\e[0;33m<<<\e[0m $(get_msg)"
 	       	echo -e -n "\e[0;32m> \e[0m"
+		sleep 0.1
 		cat $shared_dir/sync | grep -o "^${juid} .*" | tail -n 1 >> $shared_dir/history
 	else :; fi
 done < <(writemsg)
