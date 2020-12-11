@@ -2,7 +2,13 @@
 [ -n "$TMPDIR" ] || TMPDIR=/tmp
 shared_dir=$TMPDIR/talk_global
 [ -d $shared_dir ] || mkdir -m 777 $shared_dir
-tuser="$(whoami)"
+echo "talk-global v1"
+if [ "$1" == "login" ]; then
+	read -rp "Enter your nickname: " tuser
+	[ -n "$tuser" ] || { echo "Nickname not set"; exit 1; }
+else
+	tuser="$(whoami)"
+fi
 [ -d $shared_dir/$tuser ] || mkdir -m 777 $shared_dir/$tuser
 [ -f $shared_dir/sync ] || { touch $shared_dir/sync; chmod 777 $shared_dir/sync; }
 [ -f $shared_dir/history ] || { touch $shared_dir/history; chmod 777 $shared_dir/history; }
@@ -26,7 +32,6 @@ writemsg() {
 	writemsg
 }
 trap exit_program EXIT
-echo "talk-global v1"
 while true; do
 	if [ -z "$(cat $shared_dir/sync | grep -v "^${tuser} .*")" ]; then continue; fi
 	if [ "$(history_msg)" != "$(current_msg)" ]; then
