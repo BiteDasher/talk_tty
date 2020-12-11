@@ -20,7 +20,7 @@ get_msg() {
 writemsg() {
 	read -p "$(echo -e "\e[0;32m")> $(echo -e "\e[0m")" await_msg
 	ttemp="$(mktemp -p $shared_dir/$tuser)"
-	echo "$tuser $(echo $ttemp | cut -d"/" -f5-)" >> $shared_dir/sync
+	echo "$tuser $(echo $ttemp | grep -o "[^/]*$")" >> $shared_dir/sync
 	echo "$await_msg" > $ttemp; chmod 777 $ttemp
 	writemsg
 }
