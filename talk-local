@@ -1,5 +1,6 @@
 #!/bin/bash
-shared_dir=/tmp/talk_local
+[ -n "$TMPDIR" ] || TMPDIR=/tmp
+shared_dir=$TMPDIR/talk_local
 [ -d $shared_dir ] || mkdir -m 777 $shared_dir
 tuser="$(whoami)"
 [ -d $shared_dir/$tuser ] || mkdir -m 777 $shared_dir/$tuser
